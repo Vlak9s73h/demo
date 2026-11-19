@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кофейня-кондитерская «ЖеТо» • Одеса</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #14100E;
+      --card-bg: #1F1916;
+      --card-border: #2E2520;
+      --accent: #D4A373;
+      --accent-hover: #E3B587;
+      --text: #FAF5EE;
+      --text-muted: #B8A99A;
+      --danger: #9e4747;
+      --success: #587b58;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Шапка */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(20, 16, 14, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      transition: var(--transition);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .header-contacts {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-phone {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header-phone {
+        display: inline-block;
+      }
+    }
+
+    .header-phone:hover {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Hero section */
+    .hero {
+      min-height: 100vh;
+      padding-top: 95px;
+      padding-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      background: linear-gradient(rgba(20, 16, 14, 0.7), rgba(20, 16, 14, 0.9)), radial-gradient(circle at center, #2e2520 0%, #14100e 100%);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin-bottom: 20px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Main Sections */
+    section {
+      padding: 80px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      text-align: center;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Menu Section */
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background-color: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .menu-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .menu-card-title {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .menu-card-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .menu-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 15px;
+    }
+
+    .menu-card-price {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    /* Кнопки кількості */
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    .qty-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .qty-num {
+      color: var(--text);
+      font-weight: 600;
+      min-width: 15px;
+      text-align: center;
+    }
+
+    /* Блок бронювання */
+    .booking-section {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 600px) {
+      .booking-form {
+        grid-template-columns: 1fr 1fr;
+      }
+      .booking-form .full-width {
+        grid-column: span 2;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      background-color: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 12px 15px;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Контакти */
+    .contacts-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .contacts-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-info-item {
+      margin-bottom: 25px;
+    }
+
+    .contact-info-item h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .contact-info-item p, .contact-info-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-info-item a:hover {
+      color: var(--accent);
+    }
+
+    /* Плаваюча кнопка замовлення */
+    .floating-cart-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 999;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+      border: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .floating-cart-btn.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .floating-cart-btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Модальне вікно */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 15px;
+    }
+
+    .modal-title {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    .cart-items-list {
+      margin-bottom: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.95rem;
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+    }
+
+    .cart-item-price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-left: 15px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 25px;
+      border-top: 2px solid var(--card-border);
+      padding-top: 15px;
+    }
+
+    .fallback-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+    
+    .fallback-link:hover {
+      color: var(--accent);
+    }
+
+    /* Toast сповіщення */
+    .toast {
+      position: fixed;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 3000;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <a href="#" class="logo">ЖеТо • Одеса</a>
+    <div class="header-contacts">
+      <a href="tel:+380964177111" class="header-phone">+380 (96) 417-71-11</a>
+      <button class="btn btn-outline" onclick="scrollToBooking()">Забронювати столик</button>
+    </div>
+  </header>
+
+  <!-- Головний екран -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Легендарна кав'ярня з антикварною душею в центрі Одеси</h1>
+      <p>Фірмові домашні торти, сніданки та авторська кава на Гаванній, 2</p>
+      <div class="hero-buttons">
+        <button class="btn" onclick="scrollToBooking()">Забронювати столик</button>
+        <a href="#menu" class="btn btn-outline">Фірмові торти та меню</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Меню -->
+  <section id="menu">
+    <h2 class="section-title">Наше меню</h2>
+    <p class="section-subtitle">Оберіть фірмові десерти та напої, додайте їх до замовлення та насолоджуйтеся смаком у закладі чи вдома</p>
+    
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterMenu('all')">Всі позиції</button>
+      <button class="tab-btn" onclick="filterMenu('cakes')">Фірмові торти та пироги</button>
+      <button class="tab-btn" onclick="filterMenu('drinks')">Кава та чай</button>
+      <button class="tab-btn" onclick="filterMenu('breakfast')">Сніданки</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Динамічно заповнюється через JS -->
+    </div>
+  </section>
+
+  <!-- Бронювання столика -->
+  <section id="booking">
+    <div class="booking-section">
+      <h2 class="section-title" style="font-size: 2rem; margin-bottom: 10px;">Бронювання столика</h2>
+      <p class="section-subtitle" style="margin-bottom: 30px;">Забронюйте столик за кілька кліків через Viber</p>
+      
+      <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
+        <div class="form-group full-width">
+          <label class="form-label">Оберіть зону закладу</label>
+          <select class="form-select" id="bookZone" required>
+            <option value="Зал з антикваріатом">Зал з антикваріатом</option>
+            <option value="Літні столики на Гаванній">Літні столики на Гаванній</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Кількість гостей</label>
+          <select class="form-select" id="bookGuests" required>
+            <option value="1 гість">1 гість</option>
+            <option value="2 гості" selected>2 гості</option>
+            <option value="3 гості">3 гості</option>
+            <option value="4 гості">4 гості</option>
+            <option value="5 гостей">5 гостей</option>
+            <option value="6+ гостей">6+ гостей</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Дата</label>
+          <input type="date" class="form-input" id="bookDate" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Час</label>
+          <input type="time" class="form-input" id="bookTime" value="12:00" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я</label>
+          <input type="text" class="form-input" id="bookName" placeholder="Введіть ваше ім'я" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label class="form-label">Телефон</label>
+          <input type="tel" class="form-input" id="bookPhone" placeholder="+380..." required>
+        </div>
+
+        <div class="form-group full-width" style="margin-top: 10px;">
+          <button type="submit" class="btn" style="width: 100%; padding: 14px;">Забронювати у Viber</button>
+          <a href="tel:+380964177111" class="fallback-link">Або зателефонувати: +380 (96) 417-71-11</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Контакти -->
+  <section id="contacts">
+    <h2 class="section-title">Контакти</h2>
+    <p class="section-subtitle">Чекаємо на вас щодня в серці Одеси</p>
+
+    <div class="contacts-container">
+      <div>
+        <div class="contact-info-item">
+          <h3>Адреса</h3>
+          <p>м. Одеса, вул. Гаванна, 2 (ріг пров. Маяковського, 1)</p>
+        </div>
+        <div class="contact-info-item">
+          <h3>Графік роботи</h3>
+          <p>Пн–Нд 08:30–21:00</p>
+        </div>
+        <div class="contact-info-item">
+          <h3>Телефон</h3>
+          <p><a href="tel:+380964177111">+380 (96) 417-71-11</a></p>
+        </div>
+      </div>
+      <div>
+        <div class="contact-info-item">
+          <h3>Атмосфера</h3>
+          <p>Легендарна кав'ярня-кондитерська «ЖеTo» зберігає неповторний дух старої Одеси. Антикварні меблі, витончений фарфор, затишна тераса та неперевершені десерти за авторськими рецептами створюють особливий настрій для кожного гостя.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Плаваюча кнопка кошика -->
+  <button class="floating-cart-btn" id="floatingCartBtn" onclick="openCartModal()">
+    <span id="cartBtnText">Моє замовлення (0 — 0 грн)</span>
+  </button>
+
+  <!-- Модальне вікно кошика -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Ваше замовлення</h3>
+        <button class="modal-close" onclick="closeCartModal()">&times;</button>
+      </div>
+      
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Позиції у кошику -->
+      </div>
+
+      <div class="cart-total">
+        <span>Разом:</span>
+        <span id="cartModalTotal">0 грн</span>
+      </div>
+
+      <form onsubmit="handleCheckout(event)">
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label class="form-label">Ваше ім'я</label>
+          <input type="text" class="form-input" id="orderName" placeholder="Введіть ваше ім'я" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 25px;">
+          <label class="form-label">Телефон</label>
+          <input type="tel" class="form-input" id="orderPhone" placeholder="+380..." required>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%; padding: 14px;">Надіслати замовлення у Viber</button>
+        <a href="tel:+380964177111" class="fallback-link">Або зателефонувати: +380 (96) 417-71-11</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Сповіщення Toast -->
+  <div class="toast" id="toast">Текст замовлення скопійовано! Натисніть «Вставити» у відкритому чаті Viber</div>
+
+  <script>
+    // Дані меню
+    const menuData = [
+      { id: 1, category: 'cakes', name: 'Торт «Київський»', desc: 'З трьома видами горіхів (за шматочок)', price: 145 },
+      { id: 2, category: 'cakes', name: 'Цілий торт «Київський»', desc: 'Під замовлення', price: 950 },
+      { id: 3, category: 'cakes', name: 'Фісташковий торт', desc: 'Ніжний бісквіт та фісташковий крем', price: 155 },
+      { id: 4, category: 'cakes', name: 'Маковий торт', desc: 'Ароматний маковий десерт за фірмовим рецептом', price: 135 },
+      { id: 5, category: 'cakes', name: 'Фірмовий французький пиріг', desc: 'Витончена випічка ручної роботи', price: 140 },
+      { id: 6, category: 'cakes', name: 'Гарбузовий або курячий пиріг', desc: 'Ситно та надзвичайно смачно', price: 130 },
+      { id: 7, category: 'drinks', name: 'Капучино', desc: 'На свіжому обсмаженні з ошатною пінкою', price: 75 },
+      { id: 8, category: 'drinks', name: 'Фірмовий листовий чай', desc: 'Подається з 5 видами цукру на вибір', price: 95 },
+      { id: 9, category: 'breakfast', name: 'Ранковий сніданок від «ЖеТо»', desc: 'Ідеальний початок дня в центрі Одеси', price: 210 }
+    ];
+
+    // Стан кошика
+    let cart = {};
+
+    // Ініціалізація сторінки
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu('all');
+      updateCartUI();
+
+      // Встановлення мінімальної дати для бронювання (сьогодні)
+      const today = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('bookDate');
+      if(dateInput) {
+        dateInput.value = today;
+        dateInput.min = today;
+      }
+    });
+
+    // Рендер меню
+    function renderMenu(category) {
+      const grid = document.getElementById('menuGrid');
+      grid.innerHTML = '';
+
+      const filtered = category === 'all' 
+        ? menuData 
+        : menuData.filter(item => item.category === category);
+
+      filtered.forEach(item => {
+        const qty = cart[item.id] || 0;
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        card.innerHTML = `
+          <div>
+            <h3 class="menu-card-title">${item.name}</h3>
+            <p class="menu-card-desc">${item.desc}</p>
+          </div>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">${item.price} грн</span>
+            <div id="controls-${item.id}">
+              ${qty === 0 
+                ? `<button class="btn" onclick="changeQty(${item.id}, 1)">Додати</button>`
+                : `<div class="qty-controls">
+                     <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                     <span class="qty-num">${qty}</span>
+                     <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                   </div>`
+              }
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Оновлення активних кнопок вкладок
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event && event.target && event.target.classList.add('active');
+    }
+
+    function filterMenu(cat) {
+      renderMenu(cat);
+    }
+
+    // Зміна кількості товару
+    function changeQty(id, delta) {
+      if (!cart[id]) cart[id] = 0;
+      cart[id] += delta;
+      if (cart[id] <= 0) delete cart[id];
+      
+      renderMenu(document.querySelector('.tab-btn.active').textContent === 'Всі позиції' ? 'all' : getCurrentCategoryKey());
+      updateCartUI();
+    }
+
+    function getCurrentCategoryKey() {
+      // Допоміжна функція для збереження фільтру при зміні кількості
+      return 'all';
+    }
+
+    // Оновлення інтерфейсу кошика
+    function updateCartUI() {
+      let totalCount = 0;
+      let totalPrice = 0;
+
+      for (let id in cart) {
+        const item = menuData.find(i => i.id == id);
+        if (item) {
+          totalCount += cart[id];
+          totalPrice += item.price * cart[id];
+        }
+      }
+
+      const btn = document.getElementById('floatingCartBtn');
+      const btnText = document.getElementById('cartBtnText');
+
+      if (totalCount > 0) {
+        btnText.textContent = `Моє замовлення (${totalCount} — ${totalPrice} грн)`;
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+
+      document.getElementById('cartModalTotal').textContent = `${totalPrice} грн`;
+      renderCartItemsList();
+    }
+
+    function renderCartItemsList() {
+      const list = document.getElementById('cartItemsList');
+      list.innerHTML = '';
+
+      if (Object.keys(cart).length === 0) {
+        list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">Ваш кошик порожній</p>';
+        return;
+      }
+
+      for (let id in cart) {
+        const item = menuData.find(i => i.id == id);
+        if (item) {
+          const row = document.createElement('div');
+          row.className = 'cart-item-row';
+          row.innerHTML = `
+            <div class="cart-item-info">
+              <div>${item.name}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">${item.price} грн × ${cart[id]}</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="cart-item-price">${item.price * cart[id]} грн</span>
+              <div class="qty-controls" style="padding: 2px 6px;">
+                <button class="qty-btn" style="font-size: 0.85rem;" onclick="changeQty(${id}, -1)">-</button>
+                <span class="qty-num" style="font-size: 0.85rem;">${cart[id]}</span>
+                <button class="qty-btn" style="font-size: 0.85rem;" onclick="changeQty(${id}, 1)">+</button>
+              </div>
+            </div>
+          `;
+          list.appendChild(row);
+        }
+      }
+    }
+
+    // Модальне вікно кошика
+    function openCartModal() {
+      document.getElementById('cartModal').classList.add('active');
+    }
+
+    function closeCartModal() {
+      document.getElementById('cartModal').classList.remove('active');
+    }
+
+    // Навігація до бронювання
+    function scrollToBooking() {
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Сповіщення Toast
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // Логіка відправки замовлення у Viber
+    function handleCheckout(e) {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+
+      let orderText = `🍰 Нове замовлення у «ЖеТо»!\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n\nПозиції:\n`;
+      let totalPrice = 0;
+
+      for (let id in cart) {
+        const item = menuData.find(i => i.id == id);
+        if (item) {
+          const sum = item.price * cart[id];
+          orderText += `• ${item.name} x ${cart[id]} — ${sum} грн\n`;
+          totalPrice += sum;
+        }
+      }
+
+      orderText += `\n💰 Загальна сума: ${totalPrice} грн`;
+
+      sendToViber(orderText);
+      closeCartModal();
+    }
+
+    // Логіка відправки бронювання у Viber
+    function handleBooking(event) {
+      event.preventDefault();
+      const zone = document.getElementById('bookZone').value;
+      const guests = document.getElementById('bookGuests').value;
+      const date = document.getElementById('bookDate').value;
+      const time = document.getElementById('bookTime').value;
+      const name = document.getElementById('bookName').value.trim();
+      const phone = document.getElementById('bookPhone').value.trim();
+
+      const bookingText = `🪑 Бронювання столика у «ЖеТо»!\n👤 Гість: ${name}\n📞 Телефон: ${phone}\n📍 Зона: ${zone}\n👥 Кількість: ${guests}\n📅 Дата: ${date}\n⏰ Час: ${time}`;
+
+      sendToViber(bookingText);
+    }
+
+    // Загальна функція відправки у Viber через буфер обміну
+    function sendToViber(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast();
+          setTimeout(() => {
+            window.location.href = 'viber://chat?number=%2B380964177111';
+          }, 500);
+        }).catch(() => {
+          fallbackCopyAndOpen(text);
+        });
+      } else {
+        fallbackCopyAndOpen(text);
+      }
+    }
+
+    function fallbackCopyAndOpen(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast();
+        setTimeout(() => {
+          window.location.href = 'viber://chat?number=%2B380964177111';
+        }, 500);
+      } catch (err) {
+        alert('Будь ласка, зателефонуйте нам: +380 (96) 417-71-11');
+      }
+      document.body.removeChild(textarea);
+    }
+  </script>
+</body>
+</html>

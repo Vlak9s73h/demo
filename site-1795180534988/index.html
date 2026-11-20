@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Zerno — Авторська кава та десерти у Хмельницькому</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #16110E;
+            --card-bg: #221A15;
+            --card-hover: #2B211C;
+            --accent: #D99B66;
+            --accent-hover: #C48753;
+            --text-main: #F7F1E8;
+            --text-muted: #B8ACA0;
+            --border-color: #382D25;
+            --danger: #D96666;
+            --success: #66D99B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-title, .product-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(22, 17, 14, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .cart-btn-header {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .cart-btn-header:hover {
+            border-color: var(--accent);
+            background-color: var(--card-hover);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 100vh;
+            padding-top: 95px;
+            padding-bottom: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #16110E;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background-color: var(--card-bg);
+        }
+
+        /* Menu section */
+        .menu-section {
+            padding: 60px 20px 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--accent);
+            color: #16110E;
+            border-color: var(--accent);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .product-img-placeholder {
+            width: 100%;
+            height: 180px;
+            background-color: #2b201a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-style: italic;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .product-img-placeholder::after {
+            content: 'Coffee Zerno';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            opacity: 0.25;
+            letter-spacing: 2px;
+        }
+
+        .product-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Counter / Add Button styles */
+        .add-btn {
+            background-color: var(--accent);
+            color: #16110E;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .counter-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .counter-btn:hover {
+            background-color: var(--card-bg);
+            color: var(--accent);
+        }
+
+        .counter-value {
+            padding: 0 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* Выдвижное отдельное окно корзины справа */
+        .cart-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 250;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .cart-sidebar-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-left: 1px solid var(--border-color);
+            z-index: 260;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+
+        .cart-sidebar-overlay.open .cart-sidebar {
+            right: 0;
+        }
+
+        .cart-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-sidebar-title {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
+        }
+
+        .close-sidebar-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-sidebar-btn:hover {
+            color: var(--text-main);
+        }
+
+        .cart-sidebar-body {
+            padding: 24px;
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-sidebar-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cart-sidebar-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .cart-sidebar-total span:last-child {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .cart-sidebar-footer .btn-primary {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 14px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            padding: 16px;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            width: 95%;
+            max-width: 540px;
+            height: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--text-main);
+        }
+
+        /* Modal Cart Items list */
+        .modal-cart-list {
+            margin-bottom: 24px;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .modal-cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+
+        .modal-cart-item-name {
+            flex-grow: 1;
+            margin-right: 12px;
+        }
+
+        .modal-cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-cart-item-price {
+            font-weight: 600;
+            color: var(--accent);
+            min-width: 85px;
+            text-align: right;
+        }
+
+        .empty-cart-msg {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 30px 0;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        /* Form Controls inside modal */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .radio-label {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            font-size: 0.95rem;
+            cursor: pointer;
+            background-color: var(--bg-color);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .radio-label input {
+            accent-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .radio-label.selected {
+            border-color: var(--accent);
+            background-color: rgba(217, 155, 102, 0.08);
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .viber-submit-btn {
+            width: 100%;
+            background-color: #7360F2;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s;
+            margin-top: 12px;
+        }
+
+        .viber-submit-btn:hover {
+            background-color: #6350e0;
+        }
+
+        .viber-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.4;
+        }
+
+        .modal-phone-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .modal-phone-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Contacts & Footer */
+        .contacts-section {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .contacts-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacts-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .contacts-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-top: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            background-color: var(--bg-color);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Отдельное окно заказа (страница/модалка полного экрана) */
+        .checkout-page-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .checkout-page-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .checkout-header-title {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
+        }
+
+        .close-checkout-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-checkout-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .checkout-container {
+            max-width: 700px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .checkout-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .checkout-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding-top: 95px;
+            }
+            .cart-sidebar {
+                max-width: 100%;
+                right: -100%;
+            }
+            .checkout-container {
+                margin: 20px auto;
+                padding: 0 10px;
+            }
+            .checkout-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <a href="#" class="logo">COFFEE <span>ZERNO</span></a>
+        <button class="cart-btn-header" onclick="openCartModal()">
+            🛒 <span id="headerCartText">Кошик (0)</span>
+        </button>
+    </header>
+
+    <!-- Головний екран -->
+    <section class="hero">
+        <h1>Авторська кава та домашні десерти у серці Хмельницького</h1>
+        <p>Свіжа випічка з 08:30 ранку, фірмовий Наполеон та передзамовлення цілих тортів без черги</p>
+        <div class="hero-buttons">
+            <a href="#menu" class="btn btn-primary">Переглянути меню</a>
+            <a href="#menu" class="btn btn-outline" onclick="filterMenu('Торти та випічка')">Замовити цілий торт</a>
+        </div>
+    </section>
+
+    <!-- Меню -->
+    <section class="menu-section" id="menu">
+        <h2 class="section-title">Наше меню</h2>
+        <p class="section-subtitle">Обирайте улюблені смаколики та ароматну каву</p>
+
+        <!-- Вкладки -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="filterMenu('Всі позиції')">Всі позиції</button>
+            <button class="tab-btn" onclick="filterMenu('Торти та випічка')">Торти та випічка</button>
+            <button class="tab-btn" onclick="filterMenu('Кава та напої')">Кава та напої</button>
+        </div>
+
+        <!-- Сітка товарів -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Товари генеруються через JS -->
+        </div>
+    </section>
+
+    <!-- Контакти -->
+    <section class="contacts-section" id="contacts">
+        <div class="contacts-content">
+            <h2>Чекаємо на вас у гостях</h2>
+            <p class="contacts-text">м. Хмельницький, вул. Правди | Графік: щодня 08:30–21:00 | Тел: +380 (96) 328-32-82</p>
+            <a href="tel:+380963283282" class="btn btn-outline">Зателефонувати нам</a>
+            
+            <!-- Заглушка карти Google Maps для вулиці Правди у Хмельницькому -->
+            <div class="map-container">
+                <!-- TODO: Заменить iframe на актуальную карту при наличии точных координат -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.342123456789!2d26.985!3d49.423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4732065b12345679%3A0x123456789abcdef!2sVulitsya%20Pravdy%2C%20Khmel'nyts'kyi%2C%20Khmel'nyts'ka%20oblast%2C%2029000!5e0!3m2!1suk!2sua!4v1680000000000!5m2!1suk!2sua" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2026 Coffee Zerno. Всі права захищені. м. Хмельницький, вул. Правди.</p>
+    </footer>
+
+    <!-- Отдельное выдвижное окно корзины справа -->
+    <div class="cart-sidebar-overlay" id="cartSidebarOverlay" onclick="closeCartModal()">
+        <div class="cart-sidebar" onclick="event.stopPropagation()">
+            <div class="cart-sidebar-header">
+                <h3 class="cart-sidebar-title" id="sidebarCartTitle">Ваш кошик (0)</h3>
+                <button class="close-sidebar-btn" onclick="closeCartModal()">&times;</button>
+            </div>
+            <div class="cart-sidebar-body" id="sidebarCartItemsList">
+                <!-- Список товаров -->
+            </div>
+            <div class="cart-sidebar-footer" id="sidebarCartFooter" style="display: none;">
+                <div class="cart-sidebar-total">
+                    <span>Загалом:</span>
+                    <span id="sidebarCartSum">0 грн</span>
+                </div>
+                <button class="btn btn-primary" onclick="closeCartModal(); openCheckoutPage();">Перейти до оформлення</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Віддільне вікно (сторінка) оформлення замовлення -->
+    <div class="checkout-page-overlay" id="checkoutPageOverlay">
+        <div class="checkout-header">
+            <h2 class="checkout-header-title">Оформлення замовлення</h2>
+            <button class="close-checkout-btn" onclick="closeCheckoutPage()">← Повернутися до меню</button>
+        </div>
+        <div class="checkout-container">
+            <div class="checkout-card">
+                <h3>Ваші обрані товари</h3>
+                <div class="modal-cart-list" id="checkoutCartList" style="max-height: none;">
+                    <div class="empty-cart-msg">Кошик наразі порожній</div>
+                </div>
+            </div>
+
+            <div class="checkout-card">
+                <h3>Деталі замовлення та доставка</h3>
+                <form id="orderForm" onsubmit="submitOrder(event)">
+                    <div class="form-group">
+                        <label class="form-label">Спосіб отримання:</label>
+                        <div class="radio-group">
+                            <label class="radio-label selected" id="labelPickup">
+                                <input type="radio" name="delivery" value="Заберу з кав'ярні" checked onchange="updateDeliveryType()"> З кав'ярні
+                            </label>
+                            <label class="radio-label" id="labelDelivery">
+                                <input type="radio" name="delivery" value="Доставка" onchange="updateDeliveryType()"> Доставка
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="clientName">Ваше ім'я</label>
+                        <input type="text" id="clientName" class="form-input" required placeholder="Введіть ваше ім'я">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="clientPhone">Телефон</label>
+                        <input type="tel" id="clientPhone" class="form-input" required placeholder="+380 (__) ___-__-__" value="+380 ">
+                    </div>
+
+                    <button type="submit" class="viber-submit-btn">
+                        💬 Надіслати замовлення у Viber
+                    </button>
+                    <div class="viber-note">
+                        Текст замовлення скопіюється автоматично — просто вставте його у чаті Viber
+                    </div>
+
+                    <a href="tel:+380963283282" class="modal-phone-link">Або зателефонувати: +380 (96) 328-32-82</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript-логіка -->
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Торт «Наполеон» з ягодами та безе",
+                desc: "Ніжне листкове тісто, фірмовий заварний крем, свіжі ягоди та легке безе.",
+                price: 135,
+                category: "Торти та випічка"
+            },
+            {
+                id: 2,
+                name: "Цілий торт «Наполеон» 1.5 кг під замовлення",
+                desc: "Ідеальний вибір для свята чи сімейного вечора. Попереднє замовлення без черги.",
+                price: 890,
+                category: "Торти та випічка"
+            },
+            {
+                id: 3,
+                name: "Заварне тістечко з ніжним кремом",
+                desc: "Хрустка скоринка кракеліну та багато шовкового крем-пасьєре.",
+                price: 65,
+                category: "Торти та випічка"
+            },
+            {
+                id: 4,
+                name: "Шоколадно-вершковий медовик «Zerno»",
+                desc: "Арогатні медові коржі, шоколадний крем та вершкова ніжність.",
+                price: 140,
+                category: "Торти та випічка"
+            },
+            {
+                id: 5,
+                name: "Набір макаронс 5 шт.",
+                desc: "Асорті вишуканих французьких тістечок з різними смаками.",
+                price: 160,
+                category: "Торти та випічка"
+            },
+            {
+                id: 6,
+                name: "Капучино / Флет Вайт",
+                desc: "Подвійний ристрето та м'яке збите молоко спешелти обсмажування.",
+                price: 65,
+                category: "Кава та напої"
+            },
+            {
+                id: 7,
+                name: "Лавандовий Раф",
+                desc: "Фірмовий кавовий напій з натуральним лавандовим цукром та вершками.",
+                price: 85,
+                category: "Кава та напої"
+            }
+        ];
+
+        // Стан кошика { productId: quantity }
+        let cart = {};
+        let currentCategory = 'Всі позиції';
+
+        // Ініціалізація сторінки
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+        });
+
+        // Рендер карток меню
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            const filtered = currentCategory === 'Всі позиції' 
+                ? products 
+                : products.filter(p => p.category === currentCategory);
+
+            filtered.forEach(product => {
+                const qty = cart[product.id] || 0;
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                card.innerHTML = `
+                    <div class="product-img-placeholder"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-desc">${product.desc}</p>
+                        <div class="product-footer">
+                            <span class="product-price">${product.price} грн</span>
+                            <div id="action-container-${product.id}">
+                                ${qty === 0 ? `
+                                    <button class="add-btn" onclick="changeQuantity(${product.id}, 1)">Додати</button>
+                                ` : `
+                                    <div class="counter-controls">
+                                        <button class="counter-btn" onclick="changeQuantity(${product.id}, -1)">-</button>
+                                        <span class="counter-value">${qty}</span>
+                                        <button class="counter-btn" onclick="changeQuantity(${product.id}, 1)">+</button>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Фільтрація за вкладками
+        function filterMenu(category) {
+            currentCategory = category;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.textContent === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderProducts();
+        }
+
+        // Зміна кількості товару в кошику
+        function changeQuantity(productId, delta) {
+            if (!cart[productId]) {
+                cart[productId] = 0;
+            }
+            cart[productId] += delta;
+            if (cart[productId] <= 0) {
+                delete cart[productId];
+            }
+            renderProducts();
+            updateCartUI();
+        }
+
+        // Підрахунок загальної кількості та суми
+        function getCartStats() {
+            let totalCount = 0;
+            let totalPrice = 0;
+            for (const [id, qty] of Object.entries(cart)) {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    totalCount += qty;
+                    totalPrice += product.price * qty;
+                }
+            }
+            return { totalCount, totalPrice };
+        }
+
+        // Оновлення інтерфейсу кошика
+        function updateCartUI() {
+            const { totalCount, totalPrice } = getCartStats();
+
+            // Шапка
+            document.getElementById('headerCartText').textContent = `Кошик (${totalCount})`;
+
+            // Сайдбар кошика
+            const sidebarTitle = document.getElementById('sidebarCartTitle');
+            const itemsListContainer = document.getElementById('sidebarCartItemsList');
+            const sidebarFooter = document.getElementById('sidebarCartFooter');
+            const sidebarSum = document.getElementById('sidebarCartSum');
+
+            sidebarTitle.textContent = `Ваш кошик (${totalCount} поз.)`;
+            sidebarSum.textContent = `${totalPrice} грн`;
+
+            if (totalCount > 0) {
+                sidebarFooter.style.display = 'flex';
+                let itemsHtml = '';
+                for (const [id, qty] of Object.entries(cart)) {
+                    const product = products.find(p => p.id == id);
+                    if (product) {
+                        itemsHtml += `
+                            <div class="modal-cart-item">
+                                <span class="modal-cart-item-name">${product.name}</span>
+                                <div class="modal-cart-item-controls">
+                                    <div class="counter-controls">
+                                        <button class="counter-btn" style="width:32px; height:32px;" onclick="changeQuantity(${product.id}, -1)">-</button>
+                                        <span class="counter-value">${qty}</span>
+                                        <button class="counter-btn" style="width:32px; height:32px;" onclick="changeQuantity(${product.id}, 1)">+</button>
+                                    </div>
+                                </div>
+                                <span class="modal-cart-item-price">${product.price * qty} грн</span>
+                            </div>
+                        `;
+                    }
+                }
+                itemsListContainer.innerHTML = itemsHtml;
+            } else {
+                sidebarFooter.style.display = 'none';
+                itemsListContainer.innerHTML = '<div class="empty-cart-msg">Кошик наразі порожній</div>';
+            }
+
+            renderCheckoutCartItems();
+        }
+
+        // Відкриття та закриття бокового вікна кошика
+        function openCartModal() {
+            document.getElementById('cartSidebarOverlay').classList.add('open');
+            updateCartUI();
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartSidebarOverlay').classList.remove('open');
+        }
+
+        // Отдельное окно заказа
+        function openCheckoutPage() {
+            closeCartModal();
+            document.getElementById('checkoutPageOverlay').classList.add('open');
+            renderCheckoutCartItems();
+        }
+
+        function closeCheckoutPage() {
+            document.getElementById('checkoutPageOverlay').classList.remove('open');
+            updateCartUI();
+        }
+
+        // Рендер елементів всередині окремої сторінки замовлення
+        function renderCheckoutCartItems() {
+            const listContainer = document.getElementById('checkoutCartList');
+            const { totalCount, totalPrice } = getCartStats();
+
+            if (totalCount === 0) {
+                listContainer.innerHTML = '<div class="empty-cart-msg">Кошик наразі порожній</div>';
+                return;
+            }
+
+            let html = '';
+            for (const [id, qty] of Object.entries(cart)) {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    html += `
+                        <div class="modal-cart-item">
+                            <span class="modal-cart-item-name">${product.name}</span>
+                            <div class="modal-cart-item-controls">
+                                <div class="counter-controls">
+                                    <button class="counter-btn" style="width:32px; height:32px;" onclick="changeQuantity(${product.id}, -1)">-</button>
+                                    <span class="counter-value">${qty}</span>
+                                    <button class="counter-btn" style="width:32px; height:32px;" onclick="changeQuantity(${product.id}, 1)">+</button>
+                                </div>
+                            </div>
+                            <span class="modal-cart-item-price">${product.price * qty} грн</span>
+                        </div>
+                    `;
+                }
+            }
+
+            html += `
+                <div style="display: flex; justify-content: space-between; margin-top: 16px; font-weight: 700; font-size: 1.2rem; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                    <span>Загалом:</span>
+                    <span style="color: var(--accent);">${totalPrice} грн</span>
+                </div>
+            `;
+
+            listContainer.innerHTML = html;
+        }
+
+        // Перемикання стилю радіокнопок доставки
+        function updateDeliveryType() {
+            const pickupRadio = document.querySelector('input[value="Заберу з кав\'ярні"]');
+            const labelPickup = document.getElementById('labelPickup');
+            const labelDelivery = document.getElementById('labelDelivery');
+
+            if (pickupRadio.checked) {
+                labelPickup.classList.add('selected');
+                labelDelivery.classList.remove('selected');
+            } else {
+                labelDelivery.classList.add('selected');
+                labelPickup.classList.remove('selected');
+            }
+        }
+
+        // Формування чека та надсилання у Viber за правилами
+        function submitOrder(event) {
+            event.preventDefault();
+
+            const { totalCount, totalPrice } = getCartStats();
+            if (totalCount === 0) {
+                alert('Ваш кошик порожній!');
+                return;
+            }
+
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const deliveryType = document.querySelector('input[name="delivery"]:checked').value;
+
+            // Формуємо чек на українській мові
+            let orderText = `☕ Замовлення від Coffee Zerno\n`;
+            orderText += `--------------------------------\n`;
+            orderText += `Ім'я: ${name}\n`;
+            orderText += `Телефон: ${phone}\n`;
+            orderText += `Отримання: ${deliveryType}\n`;
+            orderText += `--------------------------------\n`;
+            orderText += `Позиції:\n`;
+
+            for (const [id, qty] of Object.entries(cart)) {
+                const product = products.find(p => p.id == id);
+                if (product) {
+                    orderText += `- ${product.name} x ${qty} шт. = ${product.price * qty} грн\n`;
+                }
+            }
+
+            orderText += `--------------------------------\n`;
+            orderText += `РАЗОМ до сплати: ${totalPrice} грн\n`;
+
+            // Копіювання у буфер обміну
+            navigator.clipboard.writeText(orderText).then(() => {
+                alert('Текст замовлення скопійовано! Натисніть «Вставити» у відкритому чаті Viber');
+                // Перенаправлення у Viber
+                window.location.href = 'viber://chat?number=%2B380963283282';
+            }).catch(err => {
+                console.error('Помилка копіювання: ', err);
+                alert('Замовлення сформовано. Будь ласка, перейдіть у Viber.');
+                window.location.href = 'viber://chat?number=%2B380963283282';
+            });
+        }
+    </script>
+</body>
+</html>
